@@ -21,6 +21,7 @@ window.onload = () => {
     let isMovingRight = false;
 
 
+
     let obstacles = [];
     let i=0;
     let score = -20;
@@ -37,6 +38,7 @@ window.onload = () => {
           if (this.y >= canvas.height) {
             this.y = 0; // Reinicia la posición de la carretera al llegar al final
           }
+
 
           // Dibuja la imagen de la carretera en la posición actual y la posición anterior
           ctx.drawImage(this.img, 0, this.y, canvas.width, canvas.height);
@@ -77,7 +79,7 @@ window.onload = () => {
 
     }
 
-
+/*
       function updateCanvas() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         roadImageMove.draw(); // Dibuja la carretera en movimiento
@@ -97,6 +99,41 @@ window.onload = () => {
       
       newObstacle.recalculatePosition();
       newObstacle.print();
+
+      setInterval(updateCanvas, 1000 / 60); // Actualiza el lienzo del juego a 60 FPS
+
+
+
+          // Dibuja la imagen de la carretera en la posición actual y la posición anterior
+          ctx.drawImage(this.img, 0, this.y, canvas.width, canvas.height);
+          ctx.drawImage(
+            this.img,
+            0,
+            this.y - canvas.height,
+            canvas.width,
+            canvas.height
+          );
+        }
+      };
+
+      carImage.onload = function() {
+        // Dibuja la imagen de la carretera y el coche en su posición inicial
+        ctx.drawImage(roadImage, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(carImage, carX, carY, carWidth, carHeight);
+      };
+*/
+      function updateCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        roadImageMove.draw(); // Dibuja la carretera en movimiento
+
+        if (isMovingLeft) {
+          carX -= 5; // Ajusta el valor para la velocidad deseada de movimiento hacia la izquierda
+        } else if (isMovingRight) {
+          carX += 5; // Ajusta el valor para la velocidad deseada de movimiento hacia la derecha
+        }
+
+        ctx.drawImage(carImage, carX, carY, carWidth, carHeight); // Dibuja el coche en su nueva posición
+      }
 
       setInterval(updateCanvas, 1000 / 60); // Actualiza el lienzo del juego a 60 FPS
 
@@ -122,5 +159,7 @@ window.onload = () => {
       }
     }
 
+
   }
 };
+
